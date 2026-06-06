@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Trần Ngọc Anh — Portfolio Học Thuật</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D4AF37;
+  --gold-light:#F3E5AB;
+  --gold-deep:#8B6914;
+  --champagne:#F7E7BE;
+  --cream:#FFF8E7;
+  --sepia:#3a2a14;
+  --sepia-deep:#1f1408;
+  --glass-bg:rgba(255,248,231,0.06);
+  --glass-border:rgba(212,175,55,0.3);
+  --text:#FFF6DC;
+  --text-soft:#E8D9B0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:hidden}
+body{
+  font-family:'Montserrat',sans-serif;
+  color:var(--text);
+  background:#140b03;
+  min-height:100vh;
+  line-height:1.65;
+  position:relative;
+}
+
+/* === NỀN LỤA VÀNG CHUYỂN ĐỘNG MỀM MẠI === */
+.silk-bg{
+  position:fixed;inset:0;z-index:-3;
+  background: #160d05;
+  overflow: hidden;
+}
+.silk-wave {
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
+              radial-gradient(circle at 70% 60%, rgba(139, 105, 20, 0.12) 0%, transparent 60%),
+              linear-gradient(135deg, rgba(20,11,3,1) 0%, rgba(45,27,8,1) 50%, rgba(15,8,2,1) 100%);
+  filter: blur(40px);
+  opacity: 0.85;
+}
+.silk-bg::before, .silk-bg::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: linear-gradient(115deg, transparent 20%, rgba(243,229,171,0.15) 40%, rgba(212,175,55,0.2) 50%, rgba(139,105,20,0.1) 60%, transparent 80%);
+  filter: blur(80px);
+  animation: silkFlow 22s ease-in-out infinite;
+  transform-origin: center center;
+}
+.silk-bg::after {
+  animation-duration: 32s;
+  animation-direction: reverse;
+  background: linear-gradient(245deg, transparent 25%, rgba(212,175,55,0.12) 45%, rgba(243,229,171,0.18) 55%, transparent 75%);
+  filter: blur(100px);
+  opacity: 0.7;
+}
+@keyframes silkFlow {
+  0%, 100% {
+    transform: translate(-5%, -8%) rotate(0deg) scale(1) skewX(0deg);
+  }
+  33% {
+    transform: translate(6%, 4%) rotate(4deg) scale(1.08) skewX(3deg);
+  }
+  66% {
+    transform: translate(-3%, 8%) rotate(-3deg) scale(1.03) skewY(-2deg);
+  }
+}
+
+/* sparkle canvas */
+#sparkles{position:fixed;inset:0;z-index:-2;pointer-events:none}
+
+/* === NAVBAR === */
+nav.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 5vw;
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(20,12,4,0.65);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--glass-border);
+}
+.brand{
+  font-family:'Great Vibes',cursive;
+  font-size:30px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-deep));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{
+  color:var(--text-soft);text-decoration:none;font-size:14px;font-weight:500;
+  letter-spacing:1.2px;text-transform:uppercase;transition:.3s;position:relative;
+}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--gold);transition:.3s}
+.nav-links a:hover::after{width:100%}
+.key-btn{
+  background:transparent;border:1px solid var(--glass-border);
+  color:var(--gold);width:38px;height:38px;border-radius:50%;
+  cursor:pointer;display:grid;place-items:center;transition:.3s;
+}
+.key-btn:hover{background:var(--gold);color:#2a1808;box-shadow:0 0 20px rgba(212,175,55,0.5)}
+
+/* === HERO === */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:120px 5vw 60px;
+}
+.hero-inner{max-width:900px}
+.eyebrow{
+  font-family:'Great Vibes',cursive;font-size:38px;color:var(--gold-light);
+  margin-bottom:8px;opacity:.9;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;font-weight:900;
+  font-size:clamp(48px,8vw,96px);line-height:1.05;
+  background:linear-gradient(135deg,#FFF6DC 0%,var(--gold-light) 40%,var(--gold) 70%,var(--gold-deep) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:-2px;margin-bottom:18px;
+  text-shadow:0 0 40px rgba(212,175,55,0.2);
+}
+.hero .meta{
+  display:flex;justify-content:center;gap:30px;flex-wrap:wrap;
+  font-size:14px;color:var(--text-soft);letter-spacing:2px;text-transform:uppercase;margin-bottom:30px;
+}
+.hero .meta span{padding:8px 18px;border:1px solid var(--glass-border);border-radius:30px;background:var(--glass-bg);backdrop-filter:blur(15px)}
+.hero p.lead{
+  font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--text-soft);
+  font-style:italic;max-width:680px;margin:0 auto;
+}
+.scroll-cue{
+  margin-top:60px;font-size:12px;letter-spacing:4px;color:var(--gold);
+  text-transform:uppercase;animation:bounce 2s infinite;
+}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+/* === SECTIONS === */
+section{padding:90px 5vw;position:relative}
+.section-title{
+  text-align:center;margin-bottom:60px;
+}
+.section-title .small{
+  font-family:'Great Vibes',cursive;font-size:32px;color:var(--gold);margin-bottom:6px;
+}
+.section-title h2{
+  font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,56px);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:-1px;
+}
+.section-title .divider{
+  width:90px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:18px auto;
+}
+
+/* glass card */
+.glass{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:24px;
+  backdrop-filter:blur(25px) saturate(140%);
+  -webkit-backdrop-filter:blur(25px) saturate(140%);
+  box-shadow:0 25px 60px -20px rgba(0,0,0,0.55),
+             inset 0 1px 0 rgba(255,255,255,0.06),
+             0 0 0 1px rgba(212,175,55,0.05);
+}
+
+/* introduction */
+.intro-grid{
+  display:grid;grid-template-columns:1fr 1.4fr;gap:30px;max-width:1200px;margin:0 auto;
+}
+@media(max-width:860px){.intro-grid{grid-template-columns:1fr}}
+.profile-card{padding:40px;text-align:center}
+.avatar{
+  width:160px;height:160px;border-radius:50%;margin:0 auto 24px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-deep));
+  display:grid;place-items:center;
+  font-family:'Playfair Display',serif;font-size:62px;color:#2a1808;font-weight:700;
+  box-shadow:0 0 50px rgba(212,175,55,0.4),inset 0 0 30px rgba(255,255,255,0.2);
+  position:relative;
+}
+.avatar::before{
+  content:"";position:absolute;inset:-6px;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent,var(--gold),transparent,var(--gold-light),transparent);
+  z-index:-1;animation:spin 8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.profile-card h3{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold-light);margin-bottom:6px}
+.profile-card .role{font-style:italic;color:var(--text-soft);margin-bottom:20px;font-family:'Cormorant Garamond',serif;font-size:18px}
+.info-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed rgba(212,175,55,0.2);font-size:14px}
+.info-row:last-child{border-bottom:none}
+.info-row .k{color:var(--gold);font-weight:500;letter-spacing:1px;text-transform:uppercase;font-size:11px}
+.info-row .v{color:var(--text);text-align:right;max-width:60%}
+
+.reflection{padding:40px}
+.reflection h3{font-family:'Playfair Display',serif;font-size:30px;color:var(--gold-light);margin-bottom:6px}
+.reflection .sub{font-family:'Great Vibes',cursive;color:var(--gold);font-size:24px;margin-bottom:18px}
+.reflection p{margin-bottom:14px;color:var(--text-soft);font-size:15px;line-height:1.85}
+.reflection p::first-letter{font-family:'Playfair Display',serif;font-size:42px;color:var(--gold);float:left;line-height:1;padding-right:8px}
+
+/* assignments / projects */
+.cards-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:26px;
+  max-width:1300px;margin:0 auto;
+}
+.assignment-card{
+  padding:32px;cursor:pointer;transition:.4s cubic-bezier(.2,.8,.2,1);
+  position:relative;overflow:hidden;
+}
+.assignment-card::before{
+  content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,0.15),transparent);
+  transition:.7s;
+}
+.assignment-card:hover::before{left:100%}
+.assignment-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 30px 70px -20px rgba(212,175,55,0.3)}
+.card-num{
+  font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;
+}
+.card-title{
+  font-family:'Playfair Display',serif;font-size:22px;color:var(--gold-light);
+  margin-bottom:14px;line-height:1.3;
+}
+.card-desc{font-size:14px;color:var(--text-soft);margin-bottom:20px;min-height:84px}
+.card-cta{
+  display:inline-flex;align-items:center;gap:8px;color:var(--gold);
+  font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:600;
+}
+.card-cta .arrow{transition:.3s}
+.assignment-card:hover .card-cta .arrow{transform:translateX(6px)}
+
+/* conclusion section styling */
+.summary-container{
+  max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:30px;
+}
+.summary-box{padding:40px}
+.summary-box h3{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-light);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.summary-box h3::before{content:"✦";color:var(--gold);font-size:18px}
+.summary-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:30px;
+}
+@media(max-width:860px){.summary-grid{grid-template-columns:1fr}}
+
+/* modal */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(10,6,2,0.75);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:30px;
+  opacity:0;transition:.3s;
+}
+.modal-overlay.show{display:flex;opacity:1}
+.modal{
+  max-width:780px;width:100%;max-height:88vh;overflow-y:auto;
+  padding:48px;position:relative;
+  transform:scale(.9);transition:.4s cubic-bezier(.2,.8,.2,1);
+}
+.modal-overlay.show .modal{transform:scale(1)}
+.modal::-webkit-scrollbar{width:6px}
+.modal::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+.modal-close{
+  position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;
+  background:rgba(212,175,55,0.15);border:1px solid var(--glass-border);
+  color:var(--gold);cursor:pointer;display:grid;place-items:center;font-size:18px;transition:.3s;
+}
+.modal-close:hover{background:var(--gold);color:#2a1808;transform:rotate(90deg)}
+.modal h2{
+  font-family:'Playfair Display',serif;font-size:32px;color:var(--gold-light);margin-bottom:6px;padding-right:50px;
+}
+.modal .modal-sub{font-family:'Great Vibes',cursive;font-size:24px;color:var(--gold);margin-bottom:24px}
+.modal .modal-body{color:var(--text-soft);font-size:15px;line-height:1.85;margin-bottom:30px}
+
+/* upload zone */
+.upload-zone{
+  border:2px dashed var(--glass-border);border-radius:18px;padding:36px 20px;text-align:center;
+  cursor:pointer;transition:.3s;background:rgba(212,175,55,0.04);
+}
+.upload-zone:hover,.upload-zone.drag{
+  border-color:var(--gold);background:rgba(212,175,55,0.1);transform:scale(1.01);
+}
+.upload-zone .icon{font-size:42px;margin-bottom:10px;display:block}
+.upload-zone h4{font-family:'Playfair Display',serif;color:var(--gold-light);font-size:18px;margin-bottom:6px}
+.upload-zone p{font-size:13px;color:var(--text-soft)}
+.file-list{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.file-item{
+  display:flex;align-items:center;gap:12px;padding:12px 16px;
+  background:rgba(212,175,55,0.08);border:1px solid var(--glass-border);border-radius:12px;
+  animation:fadeUp .4s ease;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.file-item .fname{flex:1;font-size:13px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.progress{height:4px;background:rgba(212,175,55,0.2);border-radius:2px;overflow:hidden;width:100%;margin-top:6px}
+.progress .bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));width:0;transition:.2s}
+.file-meta{flex:1}
+
+/* toast */
+.toast{
+  position:fixed;bottom:30px;right:30px;z-index:300;
+  padding:16px 26px;border-radius:14px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1f1408;font-weight:600;
+  box-shadow:0 20px 50px rgba(212,175,55,0.4);
+  transform:translateX(120%);transition:.4s cubic-bezier(.2,.8,.2,1);
+  display:flex;align-items:center;gap:10px;
+}
+.toast.show{transform:translateX(0)}
+
+/* password modal */
+.pwd-modal{max-width:420px;padding:40px;text-align:center}
+.pwd-modal h3{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-light);margin-bottom:8px}
+.pwd-modal p{color:var(--text-soft);font-size:13px;margin-bottom:20px}
+.pwd-input{
+  width:100%;padding:14px 18px;border-radius:12px;
+  background:rgba(0,0,0,0.3);border:1px solid var(--glass-border);
+  color:var(--text);font-size:15px;font-family:inherit;outline:none;letter-spacing:3px;text-align:center;
+}
+.pwd-input:focus{border-color:var(--gold);box-shadow:0 0 20px rgba(212,175,55,0.3)}
+.btn{
+  padding:12px 26px;border-radius:30px;border:none;cursor:pointer;
+  font-family:inherit;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  transition:.3s;
+}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:#1f1408;box-shadow:0 10px 30px rgba(212,175,55,0.3)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(212,175,55,0.5)}
+.btn-ghost{background:transparent;color:var(--gold);border:1px solid var(--glass-border)}
+.btn-ghost:hover{background:rgba(212,175,55,0.1)}
+.pwd-actions{display:flex;gap:10px;justify-content:center;margin-top:18px}
+
+/* edit mode */
+body.edit-mode [data-editable]{
+  outline:1px dashed var(--gold);
+  outline-offset:4px;
+  background:rgba(212,175,55,0.06);
+  border-radius:4px;
+  cursor:text;
+  transition:.2s;
+}
+body.edit-mode [data-editable]:hover{outline-style:solid;background:rgba(212,175,55,0.12)}
+body.edit-mode [data-editable]:focus{outline:2px solid var(--gold);background:rgba(212,175,55,0.15)}
+.edit-bar{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(120%);
+  z-index:250;padding:14px 20px;border-radius:50px;
+  display:flex;gap:10px;align-items:center;
+  background:rgba(20,12,4,0.85);backdrop-filter:blur(25px);
+  border:1px solid var(--gold);
+  box-shadow:0 20px 60px rgba(212,175,55,0.3);
+  transition:.4s cubic-bezier(.2,.8,.2,1);
+}
+.edit-bar.show{transform:translateX(-50%) translateY(0)}
+.edit-bar .label{
+  color:var(--gold-light);font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  padding:0 10px;border-right:1px solid var(--glass-border);
+}
+
+/* footer */
+footer{padding:60px 5vw 40px;text-align:center;border-top:1px solid var(--glass-border);margin-top:60px;background:rgba(10,6,2,0.4);backdrop-filter:blur(15px)}
+footer .brand-f{font-family:'Great Vibes',cursive;font-size:36px;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
+footer p{color:var(--text-soft);font-size:13px}
+
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(40px);transition:.9s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:720px){
+  .nav-links a:not(.key-btn){display:none}
+  .hero{padding-top:100px}
+  section{padding:60px 5vw}
+  .modal{padding:32px 24px}
+}
+</style>
+</head>
+<body>
+<div class="silk-bg"><div class="silk-wave"></div></div>
+<canvas id="sparkles"></canvas>
+
+<nav class="navbar">
+  <div class="brand">Trần Ngọc Anh</div>
+  <div class="nav-links">
+    <a href="#intro">Giới thiệu</a>
+    <a href="#projects">Dự án</a>
+    <a href="#conclusion">Tổng kết</a>
+    <button class="key-btn" id="adminBtn" title="Admin">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow" data-editable>Portfolio Học Thuật</div>
+    <h1 data-editable>Trần Ngọc Anh</h1>
+    <div class="meta">
+      <span data-editable>MSV · 25023088</span>
+      <span data-editable>VNU-UET</span>
+      <span data-editable>2025 — 2026</span>
+    </div>
+    <p class="lead" data-editable>"Hành trình khám phá tri thức số — nơi học thuật gặp gỡ nghệ thuật, nơi mỗi bài tập là một chương sách của riêng tôi."</p>
+    <div class="scroll-cue">↓ Khám phá</div>
+  </div>
+</header>
+
+<!-- MỤC 1: GIỚI THIỆU -->
+<section id="intro">
+  <div class="section-title reveal">
+    <div class="small">— Personal Profile —</div>
+    <h2>Giới Thiệu</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="intro-grid">
+    <div class="glass profile-card reveal">
+      <div class="avatar">TA</div>
+      <h3 data-editable>Trần Ngọc Anh</h3>
+      <div class="role" data-editable>Sinh viên · </div>
+      <div class="info-row"><span class="k">Họ và tên</span><span class="v" data-editable>Trần Ngọc Anh</span></div>
+      <div class="info-row"><span class="k">MSV</span><span class="v" data-editable>25023088</span></div>
+      <div class="info-row"><span class="k">Trường</span><span class="v" data-editable>Đại học Công nghệ</span></div>
+      <div class="info-row"><span class="k">Đại học</span><span class="v" data-editable>ĐHQG Hà Nội (VNU)</span></div>
+      <div class="info-row"><span class="k">Chuyên ngành</span><span class="v" data-editable>Kỹ thuật năng lượng</span></div>
+      <div class="info-row"><span class="k">Sở thích</span><span class="v" data-editable>Nghiên cứu công nghệ, Lập trình hệ thống, Đọc sách học thuật, Sáng tạo nội dung số</span></div>
+      <div class="info-row"><span class="k">Mục tiêu</span><span class="v" data-editable>Tối ưu hóa năng lực số, Nghiên cứu chuyên sâu AI và phát triển giải pháp phần mềm toàn diện</span></div>
+    </div>
+    <div class="glass reflection reveal">
+      <h3 data-editable>Mục Tiêu Học Tập & Định Hướng</h3>
+      <div class="sub">— Learning Objectives & Portfolio Purpose —</div>
+      <p data-editable><b>Mục tiêu Portfolio này:</b> Website học thuật cá nhân này được thiết lập nhằm mục đích thể hiện trọn vẹn các kỹ năng số đã được tích lũy trong suốt quá trình học tập. Đây đồng thời là không gian lưu trữ trực quan toàn bộ các sản phẩm thực hành cá nhân và bài tập lớn, giúp Ngọc Anh dễ dàng quản lý dữ liệu, truy cập từ xa cũng như chia sẻ minh chứng năng lực số đến giảng viên và cộng đồng học thuật một cách chuyên nghiệp nhất.</p>
+      <p data-editable><b>Định hướng phát triển cá nhân:</b> Tập trung trau dồi khối kiến thức cốt lõi về khoa học dữ liệu, thành thạo các mô hình AI tạo sinh và kiến trúc công nghệ tiên tiến. Từ đó, định hình phong cách làm việc khoa học, chuẩn mực, nâng cao tư duy giải quyết vấn đề phức tạp và chuẩn bị nền tảng vững vàng đáp ứng các tiêu chuẩn khách khe trong môi trường nghiên cứu và công nghiệp số toàn cầu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MỤC 2: DỰ ÁN -->
+<section id="projects">
+  <div class="section-title reveal">
+    <div class="small">— Academic Works —</div>
+    <h2>Trang Dự Án</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="cards-grid" id="cardsGrid"></div>
+</section>
+
+<!-- MỤC 3: TỔNG KẾT -->
+<section id="conclusion">
+  <div class="section-title reveal">
+    <div class="small">— Course Reflection —</div>
+    <h2>Tổng Kết</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="summary-container">
+    <div class="glass summary-box reveal">
+      <h3 data-editable>Trải Nghiệm & Cảm Nhận Cá Nhân</h3>
+      <p data-editable>Quá trình xây dựng và hoàn thiện dự án Portfolio này là một hành trình thử thách nhưng vô cùng xứng đáng. Việc tự tay thiết kế và cấu trúc hóa toàn bộ sản phẩm học thuật không chỉ giúp Ngọc Anh nhìn nhận lại sự tiến bộ của bản thân qua từng tuần học, mà còn mang lại trải nghiệm thực tế quý báu về tư duy hệ thống và cách thức quản lý dữ liệu số một cách khoa học, chuẩn mực.</p>
+    </div>
+    <div class="summary-grid">
+      <div class="glass summary-box reveal">
+        <h3 data-editable>Kiến Thức & Kỹ Năng Quan Trọng</h3>
+        <p data-editable>Thông qua học phần này, Ngọc Anh đã đúc kết được những khối kiến thức cốt lõi nền tảng bao gồm: kỹ năng khai thác và đánh giá nguồn tin học thuật chuyên sâu (CRAAP), làm chủ kỹ nghệ Prompt Engineering (R-T-F framework) để tối ưu công cụ AI, và áp dụng quy trình Agile vào giao tiếp cộng tác nhóm trực tuyến. Đặc biệt hơn cả là nâng cao năng lực sáng tạo nội dung số đi đôi với nhận thức sâu sắc về liêm chính học thuật trong không gian mạng.</p>
+      </div>
+      <div class="glass summary-box reveal">
+        <h3 data-editable>Điểm Tâm Đắc & Thách Thức</h3>
+        <p data-editable><b>Điểm tâm đắc nhất:</b> Tạo dựng thành công một không gian lưu trữ số mang đậm dấu ấn cá nhân, nơi học thuật khô khan kết hợp hài hòa cùng ngôn ngữ thiết kế mỹ thuật giao diện tinh tế. <br><br><b>Thách thức đối mặt:</b> Việc tối ưu hóa trải nghiệm người dùng, xử lý logic kéo thả tệp tin động và đảm bảo tính đồng bộ dữ liệu khi hoạt động trong Live Edit Mode là những bài toán lập trình tương đối phức tạp mà Ngọc Anh đã nỗ lực tìm tòi để vượt qua.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand-f">Trần Ngọc Anh</div>
+  <p data-editable>© 2026 · Portfolio của Ngọc Anh · VNU-UET · Crafted with elegance</p>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="glass modal" id="modalContent"></div>
+</div>
+
+<div class="modal-overlay" id="pwdOverlay">
+  <div class="glass pwd-modal">
+    <h3>Chế Độ Quản Trị</h3>
+    <p>Nhập mật khẩu để kích hoạt Live Edit Mode</p>
+    <input type="password" class="pwd-input" id="pwdInput" placeholder="••••••••" autocomplete="off"/>
+    <div class="pwd-actions">
+      <button class="btn btn-ghost" id="pwdCancel">Hủy</button>
+      <button class="btn btn-gold" id="pwdSubmit">Xác Nhận</button>
+    </div>
+  </div>
+</div>
+
+<div class="edit-bar" id="editBar">
+  <span class="label">✦ Live Edit</span>
+  <button class="btn btn-gold" id="saveBtn">Lưu thay đổi</button>
+  <button class="btn btn-ghost" id="cancelBtn">Hủy</button>
+  <button class="btn btn-ghost" id="logoutBtn">Đăng xuất</button>
+</div>
+
+<div class="toast" id="toast"><span>✓</span><span id="toastMsg">Thành công</span></div>
+
+<script>
+// =========================================
+// ADMIN PASSWORD (change here)
+// =========================================
+const ADMIN_PASSWORD = "ngocanh";
+
+// === Assignment data ===
+const ASSIGNMENTS = [
+  {num:"Bài tập 1 — Bài 1", title:"Máy tính và các thiết bị ngoại vi",
+   desc:"Trình bày cấu trúc thư mục tối ưu và quy tắc đặt tên tệp đã thiết lập, kèm ảnh chụp minh họa.",
+   body:"<p><b>Mục tiêu bài tập:</b> Thành thạo kỹ năng tổ chức hệ thống lưu trữ dữ liệu, thiết lập quy chuẩn cấu trúc thư mục phân cấp phục vụ học tập lâu dài và chuyên nghiệp.</p><p><b>Tóm tắt quá trình thực hiện:</b> Tiến hành phân tích nhu cầu lưu trữ tài liệu theo từng học kỳ. Tiến hành thiết lập một hệ thống thư mục phân cấp khoa học trên máy tính theo nguyên tắc <b>Năm học / Học kỳ / Môn học / Loại tài liệu</b>. Áp dụng quy tắc đặt tên chuẩn hóa không dấu: <code>YYYYMMDD_TenMon_LoaiTaiLieu_v01</code> giúp tối ưu hóa công cụ tìm kiếm, sắp xếp tự động và quản lý chặt chẽ các phiên bản chỉnh sửa. Sử dụng các công cụ hệ thống như File Explorer, Total Commander để thực hiện và minh họa trực quan trực tiếp các thao tác.</p><p><b>Sản phẩm đính kèm:</b> <a href='#' style='color:var(--gold)'>[Xem File PDF Minh Chứng Cấu Trúc]</a> hoặc xem ảnh sơ đồ phân cấp đính kèm bên dưới.</p>"},
+  {num:"Bài tập 2 — Bài 2", title:"Khai thác dữ liệu và thông tin",
+   desc:"Kết quả tìm kiếm học thuật bằng toán tử nâng cao và bảng đánh giá nguồn tin.",
+   body:"<p><b>Mục tiêu bài tập:</b> Định hình kỹ năng tra cứu chuyên sâu dữ liệu số và làm chủ phương pháp luận đánh giá tài liệu học thuật khoa học.</p><p><b>Tóm tắt quá trình thực hiện:</b> Thực hành khai thác thông tin học thuật thông qua việc sử dụng các <b>toán tử Boolean nâng cao</b> (AND, OR, NOT), kết hợp dấu ngoặc kép trích dẫn, cú pháp giới hạn phạm vi nguồn <code>site:</code>, định dạng tệp tin <code>filetype:</code> trực tiếp trên Google Scholar và hệ thống cơ sở dữ liệu thư viện điện tử. Thực hiện bộ lọc chất lượng cao bằng cách áp dụng bộ tiêu chí chuẩn hóa <b>CRAAP</b> (Currency, Relevance, Authority, Accuracy, Purpose) để kiểm tra, chấm điểm độ tin cậy của từng nguồn dữ liệu, xuất bảng phân tích chi tiết cho 10 nguồn tin học thuật tiêu biểu.</p><p><b>Sản phẩm đính kèm:</b> <a href='#' style='color:var(--gold)'>[Đường link file báo cáo Excel / PDF đánh giá nguồn tin]</a></p>"},
+  {num:"Bài tập 2 — Bài 3", title:"Tổng quan về trí tuệ nhân tạo",
+   desc:"So sánh giữa Prompt ban đầu và Prompt cải tiến cùng kết quả đầu ra từ AI.",
+   body:"<p><b>Mục tiêu bài tập:</b> Hiểu rõ bản chất vận hành của các mô hình ngôn ngữ lớn (LLMs), tối ưu năng lực tương tác giữa người và máy thông qua kỹ nghệ Prompt.</p><p><b>Tóm tắt quá trình thực hiện:</b> Tiến hành thiết lập các biểu mẫu thử nghiệm đối chiếu chi tiết giữa <b>Prompt ban đầu</b> (đơn giản, mơ hồ, thiếu ngữ cảnh nền) và hệ thống <b>Prompt cải tiến</b> chuyên sâu (ứng dụng nghiêm ngặt framework cấu trúc R-T-F: Role, Task, Format và bối cảnh cụ thể). Thực hiện chạy thử nghiệm song song trên hệ thống để thu nhận kết quả đầu ra, từ đó tiến hành đo lường chất lượng nội dung dựa trên bộ tiêu chuẩn chính xác, độ đầy đủ thông tin và giá trị ứng dụng thực tiễn để đúc kết bộ nguyên tắc Prompt Engineering cá nhân.</p><p><b>Sản phẩm đính kèm:</b> <a href='#' style='color:var(--gold)'>[Xem Video phân tích Workflow tương tác AI]</a></p>"},
+  {num:"Bài tập 3 — Bài 4", title:"Giao tiếp và hợp tác trong môi trường số",
+   desc:"Minh chứng về việc sử dụng công cụ quản lý dự án nhóm và cách thức phối hợp trực tuyến.",
+   body:"<p><b>Mục tiêu bài tập:</b> Xây dựng và hoàn thiện năng lực làm việc nhóm cộng tác từ xa, vận hành dự án số theo quy trình công nghệ chuẩn mực.</p><p><b>Tóm tắt quá trình thực hiện:</b> Tiến hành điều phối và triển khai toàn bộ dự án làm việc chung của nhóm trên các không gian cộng tác số hàng đầu như <b>Trello / Notion / Microsoft Teams</b>. Tiến hành phân bổ sơ đồ công việc qua Kanban board, chia nhỏ hạng mục công việc cụ thể theo phương pháp quản lý linh hoạt <b>Agile</b>, phối hợp đồng bộ thời gian thực thông qua Google Workspace. Lưu vết minh chứng vận hành bằng ảnh chụp chi tiết lịch sử commit hệ thống, biên bản họp trực tuyến định kỳ và bảng tiến độ Gantt Chart.</p><p><b>Sản phẩm đính kèm:</b> <a href='#' style='color:var(--gold)'>[Truy cập Đường link Không gian Trello nhóm]</a></p>"},
+  {num:"Bài tập 2 — Bài 5", title:"Sáng tạo nội dung số",
+   desc:"Sản phẩm nội dung số hoàn thiện (hình ảnh, video hoặc bài viết) được hỗ trợ bởi AI.",
+   body:"<p><b>Mục tiêu bài tập:</b> Phát triển tư duy thẩm mỹ số, kết hợp nhịp nhàng giữa năng lực thiết kế cá nhân và sức mạnh chuyển đổi từ công cụ trí tuệ nhân tạo tạo sinh.</p><p><b>Tóm tắt quá trình thực hiện:</b> Lên ý tưởng nội dung và triển khai hoàn thiện chuỗi sản phẩm sáng tạo số truyền thông học thuật: biên tập và kết xuất đồ họa Poster khoa học qua <b>Midjourney/Canva</b>, dựng video ngắn kỹ thuật giới thiệu đề tài học phần qua công cụ sáng tạo chuyển động <b>Runway / Pika</b>, biên soạn nội dung bài viết chuyên sâu học thuật có sự hỗ trợ cấu trúc cấu từ <b>ChatGPT</b>. Toàn bộ quy trình thiết kế (Creative Workflow) và danh sách cấu trúc câu lệnh (Prompt List) được ghi chép minh bạch nhằm đảm bảo tính toàn vẹn học thuật.</p><p><b>Sản phẩm đính kèm:</b> <a href='#' style='color:var(--gold)'>[Xem Poster độ phân giải cao]</a> | <a href='#' style='color:var(--gold)'>[Liên kết Video Sản phẩm trên Drive]</a></p>"},
+  {num:"Bài tập 4 — Bài 6", title:"An toàn và liêm chính học thuật trong môi trường số",
+   desc:"Bộ nguyên tắc cá nhân về sử dụng AI có trách nhiệm dựa trên các nghiên cứu đã thực hiện.",
+   body:"<p><b>Mục tiêu bài tập:</b> Định hình nhận thức đạo đức công nghệ thông tin, xây dựng hành vi ứng xử văn minh và tuân thủ tuyệt đối các chuẩn mực liêm chính học thuật số.</p><p><b>Tóm tắt quá trình thực hiện:</b> Nghiên cứu sâu các văn bản chỉ dẫn, báo cáo khuyến nghị chiến lược từ các tổ chức quốc tế lớn như UNESCO, OECD liên quan đến đạo đức ứng dụng AI trong giáo dục (AI Ethics in Education). Tổng hợp luận điểm để tự xây dựng thành công <b>Bộ nguyên tắc ứng xử 5T của bản thân</b> bao gồm: <i>Trung thực trong nghiên cứu — Trích dẫn nguồn dữ liệu rõ ràng — Tự kiểm chứng thông tin đầu ra — Tôn trọng bản quyền tác giả — Trách nhiệm cá nhân đối với sản phẩm công bố</i>. Từng nguyên tắc được đặt vào các kịch bản thực tế khi làm bài luận để tối ưu hóa tính thực hành.</p><p><b>Sản phẩm đính kèm:</b> <a href='#' style='color:var(--gold)'>[Xem toàn văn Bản Cam kết Liêm chính PDF]</a></p>"}
+];
+
+// Render cards
+const grid = document.getElementById('cardsGrid');
+ASSIGNMENTS.forEach((a,i)=>{
+  const el = document.createElement('div');
+  el.className='glass assignment-card reveal';
+  el.style.animationDelay=(i*.1)+'s';
+  el.innerHTML=`
+    <div class="card-num" data-editable>${a.num}</div>
+    <div class="card-title" data-editable>${a.title}</div>
+    <div class="card-desc" data-editable>${a.desc}</div>
+    <div class="card-cta">Xem chi tiết <span class="arrow">→</span></div>
+  `;
+  el.addEventListener('click',()=>openModal(i));
+  grid.appendChild(el);
+});
+
+let currentAssignment = 0;
+
+// === MODAL ===
+const overlay = document.getElementById('modalOverlay');
+const modalContent = document.getElementById('modalContent');
+function openModal(i){
+  currentAssignment = i;
+  const a = ASSIGNMENTS[i];
+  modalContent.innerHTML=`
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="card-num" data-editable>${a.num}</div>
+    <h2 data-editable>${a.title}</h2>
+    <div class="modal-sub">— Workspace —</div>
+    <div class="modal-body" data-editable>${a.body}</div>
+    <div class="upload-zone" id="uz${i}">
+      <span class="icon">⬆</span>
+      <h4>Nộp file bài tập</h4>
+      <p>Kéo thả tệp vào đây hoặc nhấn để chọn (PDF, DOCX, JPG, PNG...)</p>
+      <input type="file" multiple style="display:none" id="fi${i}"/>
+    </div>
+    <div class="file-list" id="fl${i}"></div>
+  `;
+  overlay.classList.add('show');
+  document.body.style.overflow='hidden';
+  setupUpload(i);
+  const savedFiles =
+    JSON.parse(
+        localStorage.getItem("files_"+currentAssignment) || "[]"
+    );
+
+const list = document.getElementById('fl'+currentAssignment);
+
+savedFiles.forEach(file=>{
+    renderFile(file,list);
+});
+
+  if(document.body.classList.contains('edit-mode')) restoreEditable();
+}
+function closeModal(){
+  overlay.classList.remove('show');
+  document.body.style.overflow='';
+}
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// === FILE UPLOAD ===
+function setupUpload(i){
+  const zone = document.getElementById('uz'+i);
+  const input = document.getElementById('fi'+i);
+  const list = document.getElementById('fl'+i);
+  if(!zone||!input||!list) return;
+  // Ngăn contentEditable trong Live Edit Mode chặn input
+  zone.removeAttribute('contenteditable');
+  zone.addEventListener('click',e=>{
+    if(e.target===input) return; // tránh đệ quy khi click trực tiếp vào input
+    e.preventDefault();
+    e.stopPropagation();
+    input.value=''; // cho phép chọn lại cùng 1 file
+    input.click();
+  });
+  input.addEventListener('click',e=>e.stopPropagation());
+  input.addEventListener('change',e=>handleFiles(e.target.files,list));
+  ['dragenter','dragover'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();zone.classList.add('drag')}));
+  ['dragleave'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();zone.classList.remove('drag')}));
+  zone.addEventListener('drop',e=>{
+    e.preventDefault();e.stopPropagation();
+    zone.classList.remove('drag');
+    if(e.dataTransfer&&e.dataTransfer.files) handleFiles(e.dataTransfer.files,list);
+  });
+}
+// Chặn trình duyệt mở file khi thả ra ngoài vùng upload
+['dragover','drop'].forEach(ev=>window.addEventListener(ev,e=>{
+  if(!e.target.closest || !e.target.closest('.upload-zone')) e.preventDefault();
+}));
+function handleFiles(files,list){
+  Array.from(files).forEach(f=>{
+
+    // Lưu thông tin file
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+      const fileData = {
+        name: f.name,
+        size: f.size,
+        type: f.type,
+        content: e.target.result
+      };
+
+      let savedFiles =
+        JSON.parse(localStorage.getItem("files_"+currentAssignment) || "[]");
+
+      savedFiles.push(fileData);
+
+      localStorage.setItem(
+        "files_"+currentAssignment,
+        JSON.stringify(savedFiles)
+      );
+
+      renderFile(fileData,list);
+    };
+
+    reader.readAsDataURL(f);
+
+  });
+}
+function renderFile(fileData,list){
+
+  const item = document.createElement('div');
+
+  item.className = 'file-item';
+
+  item.innerHTML = `
+    <span style="font-size:22px">📄</span>
+
+    <div class="file-meta">
+
+      <div class="fname">
+        ${fileData.name}
+      </div>
+
+      <button
+        onclick="downloadFile('${fileData.name}')"
+        style="
+          margin-top:8px;
+          padding:6px 12px;
+          cursor:pointer;
+        "
+      >
+        Tải xuống
+      </button>
+
+    </div>
+  `;
+
+  list.appendChild(item);
+}
+function downloadFile(fileName){
+
+  const files =
+    JSON.parse(localStorage.getItem("files_"+currentAssignment) || "[]");
+
+  const file =
+    files.find(f => f.name === fileName);
+
+  if(!file) return;
+
+  const a = document.createElement("a");
+
+  a.href = file.content;
+
+  a.download = file.name;
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  document.body.removeChild(a);
+}
+
+// === TOAST ===
+const toast = document.getElementById('toast');
+const toastMsg = document.getElementById('toastMsg');
+let toastT;
+function showToast(msg){
+  toastMsg.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>toast.classList.remove('show'),2800);
+}
+
+// === SPARKLES ===
+(() => {
+  const c = document.getElementById('sparkles');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let w, h, parts = [];
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+  function resize() {
+    w = c.width = innerWidth * DPR;
+    h = c.height = innerHeight * DPR;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    const count = Math.floor((innerWidth * innerHeight) / 14000);
+    parts = Array.from({ length: count }, () => spawn());
+  }
+  function spawn() {
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: (Math.random() * 1.6 + 0.3) * DPR,
+      vx: (Math.random() - 0.5) * 0.25 * DPR,
+      vy: (-Math.random() * 0.4 - 0.05) * DPR,
+      a: Math.random() * 0.6 + 0.2,
+      pulse: Math.random() * Math.PI * 2,
+    };
+  }
+  function tick(t) {
+    ctx.clearRect(0, 0, w, h);
+    for (const p of parts) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.pulse += 0.02;
+      const alpha = p.a * (0.5 + 0.5 * Math.sin(p.pulse));
+      if (p.y < -10 || p.x < -10 || p.x > w + 10) Object.assign(p, spawn(), { y: h + 10 });
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+      g.addColorStop(0, `rgba(243,229,171,${alpha})`);
+      g.addColorStop(0.4, `rgba(212,175,55,${alpha * 0.5})`);
+      g.addColorStop(1, 'rgba(212,175,55,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  addEventListener('resize', resize);
+  resize();
+  requestAnimationFrame(tick);
+})();
+
+// === REVEAL ===
+const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// === LIVE EDIT MODE ===
+const STORAGE_KEY = 'tna_portfolio_edits_v1';
+const adminBtn = document.getElementById('adminBtn');
+const pwdOverlay = document.getElementById('pwdOverlay');
+const pwdInput = document.getElementById('pwdInput');
+const editBar = document.getElementById('editBar');
+let editSnapshot = null;
+
+adminBtn.addEventListener('click',()=>{
+  if(document.body.classList.contains('edit-mode')){return}
+  pwdOverlay.classList.add('show');
+  setTimeout(()=>pwdInput.focus(),100);
+});
+document.getElementById('pwdCancel').onclick=()=>{pwdOverlay.classList.remove('show');pwdInput.value=''};
+document.getElementById('pwdSubmit').onclick=tryLogin;
+pwdInput.addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin()});
+function tryLogin(){
+  if(pwdInput.value===ADMIN_PASSWORD){
+    pwdOverlay.classList.remove('show');
+    pwdInput.value='';
+    enterEditMode();
+    showToast('✓ Đã kích hoạt Live Edit');
+  }else{
+    showToast('✗ Sai mật khẩu');
+    pwdInput.value='';
+  }
+}
+
+function enterEditMode(){
+  document.body.classList.add('edit-mode');
+  editBar.classList.add('show');
+  editSnapshot = {};
+  document.querySelectorAll('[data-editable]').forEach((el,i)=>{
+    el.setAttribute('data-edit-id','e'+i);
+    el.setAttribute('contenteditable','true');
+    editSnapshot['e'+i] = el.innerHTML;
+  });
+}
+function exitEditMode(){
+  document.body.classList.remove('edit-mode');
+  editBar.classList.remove('show');
+  document.querySelectorAll('[data-editable]').forEach(el=>el.removeAttribute('contenteditable'));
+}
+document.getElementById('saveBtn').onclick=()=>{
+  const data = {};
+  document.querySelectorAll('[data-editable][data-edit-id]').forEach(el=>{
+    data[el.getAttribute('data-edit-id')] = el.innerHTML;
+  });
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+  showToast('✓ Đã lưu thay đổi');
+};
+document.getElementById('cancelBtn').onclick=()=>{
+  if(editSnapshot){
+    Object.entries(editSnapshot).forEach(([id,html])=>{
+      const el = document.querySelector(`[data-edit-id="${id}"]`);
+      if(el) el.innerHTML=html;
+    });
+  }
+  showToast('Đã hủy thay đổi');
+};
+document.getElementById('logoutBtn').onclick=()=>{
+  exitEditMode();
+  showToast('Đã đăng xuất');
+};
+
+// Restore saved edits
+function restoreEditable(){
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if(!saved) return;
+  try{
+    const data = JSON.parse(saved);
+    document.querySelectorAll('[data-editable]').forEach((el,i)=>{
+      if(!el.hasAttribute('data-edit-id')) el.setAttribute('data-edit-id','e'+i);
+    });
+    document.querySelectorAll('[data-editable]').forEach((el,i)=>{
+      const id = 'e'+i;
+      if(data[id]!==undefined) el.innerHTML = data[id];
+    });
+  }catch(e){}
+}
+restoreEditable();
+</script>
+</body>
+</html>
